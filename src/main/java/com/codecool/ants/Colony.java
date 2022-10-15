@@ -40,12 +40,12 @@ public class Colony {
         }
     }
 
-    public static int[] getQueenPosition(Square[][] area) {
-        int[] queenPosition = new int[0];
+    public static Square getQueenPosition(Square[][] area) {
+        Square queenPosition = null;
         for (Square[] squares : area) {
             for (int j = 0; j < area.length; j++) {
-                if (squares[j].getSquareStatus() == SquareStatus.QUEEN) {
-                    queenPosition = new int[]{squares[j].getX(), squares[j].getY()};
+                if (squares[j].getActiveOnSquare().contains(SquareStatus.QUEEN)) {
+                    queenPosition = squares[j];
                     break;
                 }
             }
