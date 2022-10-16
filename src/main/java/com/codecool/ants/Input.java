@@ -1,6 +1,7 @@
 package com.codecool.ants;
 
 import java.util.Objects;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Input{
@@ -16,5 +17,10 @@ public class Input{
             action = 1;
         }
         return action;
+    }
+
+    public static int getRandomNumber(int min, int max) {
+        Random random = new Random();
+        return random.nextInt(max - min) + min;
     }
 }

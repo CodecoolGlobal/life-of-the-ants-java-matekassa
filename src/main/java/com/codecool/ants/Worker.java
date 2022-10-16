@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class Worker extends Ant{
 
     private static final int moveLength = 1;
-    public static ArrayList<Square> getWorkerPositions(Square[][] area, ArrayList<Square> arrayList) {
+
+    public static ArrayList<Square> getPositions(Square[][] area, ArrayList<Square> arrayList) {
         for (int i = 0; i < area.length; i++) {
             for (int j = 0; j < area.length; j++) {
                 if (area[i][j].getActiveOnSquare().contains(SquareStatus.WORKER)) {
@@ -19,6 +20,7 @@ public class Worker extends Ant{
         }
         return arrayList;
     }
+
     public static void move(ArrayList<Square> workerSquares, Square[][] area) {
         for (Square square: workerSquares) {
             Direction direction = Direction.randomDirection();
@@ -35,18 +37,22 @@ public class Worker extends Ant{
             }
         }
     }
+
     public static void moveEast(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.WORKER);
         area[square.getX()][square.getY()+moveLength].addSquareStatus(SquareStatus.WORKER);
     }
+
     public static void moveWest(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.WORKER);
         area[square.getX()][square.getY()-moveLength].addSquareStatus(SquareStatus.WORKER);
     }
+
     public static void moveNorth(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.WORKER);
         area[square.getX()-moveLength][square.getY()].addSquareStatus(SquareStatus.WORKER);
     }
+
     public static void moveSouth(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.WORKER);
         area[square.getX()+moveLength][square.getY()].addSquareStatus(SquareStatus.WORKER);

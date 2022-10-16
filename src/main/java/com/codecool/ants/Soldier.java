@@ -10,7 +10,7 @@ public class Soldier extends Ant{
 
     private static final int moveLength = 1;
 
-    public static ArrayList<Square> getSoldierPositions(Square[][] area, ArrayList<Square> arrayList) {
+    public static ArrayList<Square> getPositions(Square[][] area, ArrayList<Square> arrayList) {
         for (int i = 0; i < area.length; i++) {
             for (int j = 0; j < area.length; j++) {
                 if (area[i][j].getActiveOnSquare().contains(SquareStatus.SOLDIER)) {
@@ -20,6 +20,7 @@ public class Soldier extends Ant{
         }
         return arrayList;
     }
+
 
     public static void move(ArrayList<Square> soldierSquares, Square[][] area) {
         for (Square square: soldierSquares) {
@@ -45,18 +46,22 @@ public class Soldier extends Ant{
             }
         }
     }
+
     public static void moveEast(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.SOLDIER);
         area[square.getX()][square.getY()+moveLength].addSquareStatus(SquareStatus.SOLDIER);
     }
+
     public static void moveWest(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.SOLDIER);
         area[square.getX()][square.getY()-moveLength].addSquareStatus(SquareStatus.SOLDIER);
     }
+
     public static void moveNorth(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.SOLDIER);
         area[square.getX()-moveLength][square.getY()].addSquareStatus(SquareStatus.SOLDIER);
     }
+
     public static void moveSouth(Square square, Square[][] area) {
         square.removeSquareStatus(SquareStatus.SOLDIER);
         area[square.getX()+moveLength][square.getY()].addSquareStatus(SquareStatus.SOLDIER);

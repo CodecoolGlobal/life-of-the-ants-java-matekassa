@@ -4,7 +4,6 @@ import com.codecool.ants.geometry.Square;
 import com.codecool.ants.geometry.SquareStatus;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Colony {
     private final int width;
@@ -78,16 +77,11 @@ public class Colony {
         int[][] antPositions = new int[numberOfAnts][2];
         for (int i = 0; i < numberOfAnts; i++) {
             for (int j = 0; j < 2; j++) {
-                int randomNumber = generateRandomNumber();
+                int randomNumber = Input.getRandomNumber(0, this.getWidth());
                 antPositions[i][j] = randomNumber;
             }
         }
         return antPositions;
-    }
-
-    private int generateRandomNumber() {
-        Random random = new Random();
-        return random.nextInt(this.getWidth());
     }
 
     public boolean isPositionOK(int[][] coordinates) {
@@ -107,18 +101,13 @@ public class Colony {
         return true;
     }
 
-    public static void updateColony(Square[][] area) {
-        ArrayList<Square> workerSquares = Worker.getWorkerPositions(area, new ArrayList<>());
-        ArrayList<Square> soldierSquares = Soldier.getSoldierPositions(area, new ArrayList<>());
-        ArrayList<Square> droneSquares = Drone.getDronePositions(area, new ArrayList<>());
+    public void updateColony(Square[][] area) {
+        ArrayList<Square> workerSquares = Worker.getPositions(area, new ArrayList<>());
+        ArrayList<Square> soldierSquares = Soldier.getPositions(area, new ArrayList<>());
+        ArrayList<Square> droneSquares = Drone.getPositions(area, new ArrayList<>());
         Worker.move(workerSquares, area);
         Soldier.move(soldierSquares, area);
         Drone.move(droneSquares, area);
-    }
-
-    public static boolean isValidMove (Square square, int moveLength) {
-        return ((square.getY()+moveLength < area.length || square.getX()-moveLength >= 0) ||
-                (square.getX()+moveLength < area.length || square.getY()-moveLength >= 0));
     }
 
     public static boolean isValidMoveEast(Square square, int moveLength) {
